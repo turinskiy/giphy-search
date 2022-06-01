@@ -4,13 +4,14 @@ import "./styles.css";
 function useGiphy(query) {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const apiKey = "vNiWFDmaWvqLfp0zT7w7TP87jrieGvGv";
 
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
         const response = await fetch(
-          `https://api.giphy.com/v1/gifs/search?api_key=vNiWFDmaWvqLfp0zT7w7TP87jrieGvGv&q=${query}&limit=25&offset=0&rating=g&lang=en`
+          `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}&limit=25&offset=0&rating=g&lang=en`
         );
         const json = await response.json();
         console.log({ json });
@@ -20,7 +21,7 @@ function useGiphy(query) {
           })
         );
       } catch (error) {
-        console.error(error);
+        console.log(error);
       } finally {
         setLoading(false);
       }
@@ -43,7 +44,6 @@ export default function App() {
     setQuery(search);
   }
 
-  // vNiWFDmaWvqLfp0zT7w7TP87jrieGvGv
   return (
     <div className="App">
       <form onSubmit={onSubmit}>
